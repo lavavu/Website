@@ -6,9 +6,10 @@ var canvasElement = document.getElementById('canvas');
 canvasElement.addEventListener("webglcontextlost", function(e) { canvasElement.style.display = 'none'; Module.setStatus('WebGL context lost. You will need to reload the page.'); e.preventDefault(); }, false);
 
 //LavaVu args
-if (window.args == undefined)
-  window.args = []
-  //window.args = ["-v"]
+window.args = window.location.search.substr(1).split('&');
+//window.args.push("-v")
+
+console.log(JSON.stringify(window.args));
 
 var Module = {
   arguments: window.args,
