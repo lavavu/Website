@@ -6,11 +6,12 @@ var canvasElement = document.getElementById('canvas');
 canvasElement.addEventListener("webglcontextlost", function(e) { canvasElement.style.display = 'none'; Module.setStatus('WebGL context lost. You will need to reload the page.'); e.preventDefault(); }, false);
 
 //LavaVu args
-//var args = ["-v"]
-var args = []
+if (window.args == undefined)
+  window.args = []
+  //window.args = ["-v"]
 
 var Module = {
-  arguments: args,
+  arguments: window.args,
   preRun: [],
   postRun: [],
   print: (function() {
