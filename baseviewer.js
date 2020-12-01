@@ -1,6 +1,7 @@
 //Base functions to communicate between emscripten WebGL2 viewer and IPython/Javascript page
 
 //Init standalong gui menu handler
+var hideBoxTimer;
 function initBase(dict, defaultcmaps) {
   //console.log(dict);
   //console.log(defaultcmaps);
@@ -24,6 +25,8 @@ function initBase(dict, defaultcmaps) {
     //GUI elements to show on mouseover
     if (window.viewer.gui)
       window.viewer.gui.domElement.style.display = "block";
+    if (hideBoxTimer) clearTimeout(hideBoxTimer);
+    hideBoxTimer = setTimeout(function () { hideMenu(null, window.viewer.gui);}, 1000 );
   });
 
   return viewer;
