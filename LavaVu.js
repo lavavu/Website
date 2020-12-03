@@ -187,7 +187,7 @@ var Module = typeof Module !== 'undefined' ? Module : {};
     }
   
    }
-   loadPackage({"files": [{"filename": "/dict.json", "start": 0, "end": 52683, "audio": 0}, {"filename": "/shaders/pointShader.vert", "start": 52683, "end": 53918, "audio": 0}, {"filename": "/shaders/volumeShader_b2f.frag", "start": 53918, "end": 71062, "audio": 0}, {"filename": "/shaders/triShader.frag", "start": 71062, "end": 76253, "audio": 0}, {"filename": "/shaders/pointShader.frag", "start": 76253, "end": 79637, "audio": 0}, {"filename": "/shaders/fontShader.frag", "start": 79637, "end": 80081, "audio": 0}, {"filename": "/shaders/default.vert", "start": 80081, "end": 80398, "audio": 0}, {"filename": "/shaders/triShader.vert", "start": 80398, "end": 81518, "audio": 0}, {"filename": "/shaders/volumeShader.vert", "start": 81518, "end": 81596, "audio": 0}, {"filename": "/shaders/lineShader.vert", "start": 81596, "end": 82118, "audio": 0}, {"filename": "/shaders/lineShader.frag", "start": 82118, "end": 83063, "audio": 0}, {"filename": "/shaders/default.frag", "start": 83063, "end": 83321, "audio": 0}, {"filename": "/shaders/fontShader.vert", "start": 83321, "end": 83611, "audio": 0}, {"filename": "/shaders/volumeShader.frag", "start": 83611, "end": 100767, "audio": 0}, {"filename": "/shaders/volumeShader.old", "start": 100767, "end": 116807, "audio": 0}, {"filename": "/font.bin", "start": 116807, "end": 342167, "audio": 0}], "remote_package_size": 342167, "package_uuid": "d5831e8a-2a35-4984-a326-94aecec37911"});
+   loadPackage({"files": [{"filename": "/dict.json", "start": 0, "end": 52683, "audio": 0}, {"filename": "/shaders/pointShader.vert", "start": 52683, "end": 53918, "audio": 0}, {"filename": "/shaders/volumeShader_b2f.frag", "start": 53918, "end": 71062, "audio": 0}, {"filename": "/shaders/triShader.frag", "start": 71062, "end": 76253, "audio": 0}, {"filename": "/shaders/pointShader.frag", "start": 76253, "end": 79637, "audio": 0}, {"filename": "/shaders/fontShader.frag", "start": 79637, "end": 80081, "audio": 0}, {"filename": "/shaders/default.vert", "start": 80081, "end": 80398, "audio": 0}, {"filename": "/shaders/triShader.vert", "start": 80398, "end": 81518, "audio": 0}, {"filename": "/shaders/volumeShader.vert", "start": 81518, "end": 81596, "audio": 0}, {"filename": "/shaders/lineShader.vert", "start": 81596, "end": 82118, "audio": 0}, {"filename": "/shaders/lineShader.frag", "start": 82118, "end": 83063, "audio": 0}, {"filename": "/shaders/default.frag", "start": 83063, "end": 83321, "audio": 0}, {"filename": "/shaders/fontShader.vert", "start": 83321, "end": 83611, "audio": 0}, {"filename": "/shaders/volumeShader.frag", "start": 83611, "end": 100767, "audio": 0}, {"filename": "/shaders/volumeShader.old", "start": 100767, "end": 116807, "audio": 0}, {"filename": "/font.bin", "start": 116807, "end": 342167, "audio": 0}], "remote_package_size": 342167, "package_uuid": "f2e89f0d-e54e-4a8f-bd66-c11a5654fb94"});
   
   })();
   
@@ -1300,9 +1300,9 @@ function updateGlobalBufferAndViews(buf) {
   Module['HEAPF64'] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5495968,
+var STACK_BASE = 5496000,
     STACKTOP = STACK_BASE,
-    STACK_MAX = 253088;
+    STACK_MAX = 253120;
 
 assert(STACK_BASE % 16 === 0, 'stack must start aligned');
 
@@ -1788,12 +1788,13 @@ var ASM_CONSTS = {
  96373: function($0) {if (window.viewer) window.viewer.loadFile(UTF8ToString($0))},  
  96454: function($0, $1) {window.download($0, $1)},  
  98296: function() {if (window.viewer && window.viewer.gui) {window.viewer.gui.destroy(); window.viewer.gui = null; window.viewer.vis = {}; }},  
- 108761: function() {return window.reload_flag;},  
- 108790: function() {window.reload_flag = false;},  
- 108820: function() {return window.resized;},  
- 108852: function() {window.resized = false;},  
- 108974: function($0, $1) {window.download($0, $1)},  
- 121143: function($0) {if ($0) Module.requestFullscreen(false,true); else document.exitFullscreen();}
+ 99195: function() {window.resized = true;},  
+ 108793: function() {return window.reload_flag;},  
+ 108822: function() {window.reload_flag = false;},  
+ 108852: function() {return window.resized;},  
+ 108884: function() {window.resized = false;},  
+ 109006: function($0, $1) {window.download($0, $1)},  
+ 121175: function($0) {if ($0) Module.requestFullscreen(false,true); else document.exitFullscreen();}
 };
 function get_browser_modifiers(){ if (window.m_alt || window.m_shift || window.m_ctrl) { var val = 0; if (window.m_shift) val += 1; if (window.m_ctrl) val += 2; if (window.m_alt) val += 4; return val; } else { return 0; } }
 function get_commands(){ if (window.commands && window.commands.length) { var cmd = window.commands.join(';'); window.commands = []; var lengthBytes = lengthBytesUTF8(cmd)+1; var stringOnWasmHeap = _malloc(lengthBytes); stringToUTF8(cmd, stringOnWasmHeap, lengthBytes); return stringOnWasmHeap; } else { return null; } }
