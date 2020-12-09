@@ -1,34 +1,48 @@
-<!doctype html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LavaVu</title>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>LavaVu</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="pandoc.css" />
+  <style>
+  .resizer { display:flex; margin:0; padding:0; resize:both; overflow:hidden }
+  .resizer > .resized { flex-grow:1; margin:0; padding:0; border:0 }
+  </style>
 
-    <style>
-    .resizer { display:flex; margin:0; padding:0; resize:both; overflow:hidden }
-    .resizer > .resized { flex-grow:1; margin:0; padding:0; border:0 }
-    </style>
-  </head>
-  <body>
-
-    <h1> LavaVu </h1>
-    
-    <h2><a href="/Documentation">Documentation...</a></h2>
-    <hr>
-    <p> Work in progress </p>
-    
-    <p>Demos / examples...</p>
-
-    <div class="resizer" style="width: 800px; height: 480px; border: 1px solid #888">
-      <iframe class="resized" src="webview.html?kookaburra.gldb&background=white" style="width: 100%; height: 100%; border: 1px solid #888\"></iframe>
-    </div>
-
-    <script type="text/javascript">
-
-    </script>
-  </body>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">LavaVu</h1>
+</header>
+<p>Examples and demos site, work in progress</p>
+<ul>
+<li><a href="/Documentation">Documentation</a></li>
+<li><a href="github.com/lavavu/LavaVu">Source repository</a></li>
+</ul>
+<h3 id="meshes">Meshes</h3>
+<p>Kookaburra: an example showing loading and viewing of the dataset included in this PeerJ article https://peerj.com/articles/355/</p>
+<h3 id="an-interactive-three-dimensional-approach-to-anatomical-descriptionthe-jaw-musculature-of-the-australian-laughing-kookaburra-dacelo-novaeguineae-michelle-r.-quayle-david-g.-barnes-owen-l.-kaluza-colin-r.-mchenry-2014"><em>"An interactive three dimensional approach to anatomical description—the jaw musculature of the Australian laughing kookaburra (Dacelo novaeguineae)"</em> Michelle R. Quayle, David G. Barnes, Owen L. Kaluza, Colin R. McHenry 2014</h3>
+<p>LavaVu includes built in support for loading 3D surface models in Wavefront OBJ files. For other formats/sources of surface data we can load them using python libraries and send them to LavaVu, then packed into a .gldb file to view online.</p>
+<div class="resizer" style="width: 800px; height: 480px; border: 1px solid #888">
+<iframe class="resized" src="webview.html?kookaburra.gldb&amp;background=white" style="width: 100%; height: 100%; border: 1px solid #888\">
+</iframe>
+</div>
+<h3 id="time-sequence-data">Time sequence data</h3>
+<p>Particle simulation : a very simple toy particle simulation for the sake of demonstration, particles are plotted as spherical points and a subset are plotted as tracer arrows over 300 timesteps</p>
+<p>LavaVu can load time series data natively, with support for static and time-varying elements, animations can be played and exported to video</p>
+<div class="resizer" style="width: 800px; height: 480px; border: 1px solid #888">
+<iframe class="resized" src="webview.html?particles.gldb&amp;-c1&amp;play" style="width: 100%; height: 100%; border: 1px solid #888\">
+</iframe>
+</div>
+</body>
 </html>
-
-
