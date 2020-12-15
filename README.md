@@ -2,7 +2,7 @@
 Examples and demos site, work in progress
 
 - [Documentation](/Documentation)
-- [Source repository](github.com/lavavu/LavaVu)
+- [Source repository](https://github.com/lavavu/LavaVu)
 
 ### Meshes
 
@@ -13,7 +13,8 @@ Kookaburra: an example showing loading and viewing of the dataset included in th
 LavaVu includes built in support for loading 3D surface models in Wavefront OBJ files.
 For other formats/sources of surface data we can load them using python libraries and send them to LavaVu, then packed into a .gldb file to view online.
 
-<div class="resizer" style="width: 800px; height: 480px; border: 1px solid #888"><iframe class="resized" src="webview.html?kookaburra.gldb&background=white" style="width: 100%; height: 100%; border: 1px solid #888\"></iframe></div>
+<div class="resizer" style="width: 800px; height: 480px; border: 1px solid #888"><iframe id="frame1" class="resized" src="webview.html?kookaburra.gldb&background=white" style="width: 100%; height: 100%; border: 1px solid #888\"></iframe></div>
+<button style="display: inline-block;" type="button" onclick="document.getElementById('frame1').contentWindow.commands.push('rotate y 0.5; repeat -1;')">Spin</button>
 
 
 ### Time sequence data
@@ -22,5 +23,7 @@ Particle simulation : a very simple toy particle simulation for the sake of demo
 
 LavaVu can load time series data natively, with support for static and time-varying elements, animations can be played and exported to video
 
-<div class="resizer" style="width: 800px; height: 480px; border: 1px solid #888"><iframe class="resized" src="webview.html?particles.gldb&-c1&play" style="width: 100%; height: 100%; border: 1px solid #888\"></iframe></div>
+<div class="resizer" style="width: 800px; height: 480px; border: 1px solid #888"><iframe id="frame2" class="resized" src="webview.html?particles.gldb&-c1" style="width: 100%; height: 100%; border: 1px solid #888\"></iframe></div>
+<button style="display: inline-block;" type="button" onclick="document.getElementById('frame2').contentWindow.commands.push('play')">&#x25BA; Play</button>
+<button style="display: inline-block;" type="button" onclick="document.getElementById('frame2').contentWindow.commands.push('stop')">&#x25FE; Stop</button>
 

@@ -27,22 +27,31 @@
 <p>Examples and demos site, work in progress</p>
 <ul>
 <li><a href="/Documentation">Documentation</a></li>
-<li><a href="github.com/lavavu/LavaVu">Source repository</a></li>
+<li><a href="https://github.com/lavavu/LavaVu">Source repository</a></li>
 </ul>
 <h3 id="meshes">Meshes</h3>
 <p>Kookaburra: an example showing loading and viewing of the dataset included in this PeerJ article https://peerj.com/articles/355/</p>
 <h3 id="an-interactive-three-dimensional-approach-to-anatomical-descriptionthe-jaw-musculature-of-the-australian-laughing-kookaburra-dacelo-novaeguineae-michelle-r.-quayle-david-g.-barnes-owen-l.-kaluza-colin-r.-mchenry-2014"><em>"An interactive three dimensional approach to anatomical description—the jaw musculature of the Australian laughing kookaburra (Dacelo novaeguineae)"</em> Michelle R. Quayle, David G. Barnes, Owen L. Kaluza, Colin R. McHenry 2014</h3>
 <p>LavaVu includes built in support for loading 3D surface models in Wavefront OBJ files. For other formats/sources of surface data we can load them using python libraries and send them to LavaVu, then packed into a .gldb file to view online.</p>
 <div class="resizer" style="width: 800px; height: 480px; border: 1px solid #888">
-<iframe class="resized" src="webview.html?kookaburra.gldb&amp;background=white" style="width: 100%; height: 100%; border: 1px solid #888\">
+<iframe id="frame1" class="resized" src="webview.html?kookaburra.gldb&amp;background=white" style="width: 100%; height: 100%; border: 1px solid #888\">
 </iframe>
 </div>
+<button style="display: inline-block;" type="button" onclick="document.getElementById(&#39;frame1&#39;).contentWindow.commands.push(&#39;rotate y 0.5; repeat -1;&#39;)">
+Spin
+</button>
 <h3 id="time-sequence-data">Time sequence data</h3>
 <p>Particle simulation : a very simple toy particle simulation for the sake of demonstration, particles are plotted as spherical points and a subset are plotted as tracer arrows over 300 timesteps</p>
 <p>LavaVu can load time series data natively, with support for static and time-varying elements, animations can be played and exported to video</p>
 <div class="resizer" style="width: 800px; height: 480px; border: 1px solid #888">
-<iframe class="resized" src="webview.html?particles.gldb&amp;-c1&amp;play" style="width: 100%; height: 100%; border: 1px solid #888\">
+<iframe id="frame2" class="resized" src="webview.html?particles.gldb&amp;-c1" style="width: 100%; height: 100%; border: 1px solid #888\">
 </iframe>
 </div>
+<button style="display: inline-block;" type="button" onclick="document.getElementById(&#39;frame2&#39;).contentWindow.commands.push(&#39;play&#39;)">
+► Play
+</button>
+<button style="display: inline-block;" type="button" onclick="document.getElementById(&#39;frame2&#39;).contentWindow.commands.push(&#39;stop&#39;)">
+◾ Stop
+</button>
 </body>
 </html>
