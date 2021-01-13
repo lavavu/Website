@@ -3069,6 +3069,9 @@ following papers:
  * https://www.gnu.org/licenses/lgpl.html
  * (volume shader from sharevol https://github.com/OKaluza/sharevol)
  */
+
+//See this for MIP example
+//https://github.com/mrdoob/three.js/blob/master/examples/jsm/shaders/VolumeShader.js
 #ifdef WEBGL
 uniform sampler2D uVolume;
 #define NO_DEPTH_WRITE
