@@ -1085,13 +1085,12 @@ var Module = {
     }
     statusElement.innerHTML = text;
   },
-  /*locateFile: function(path, prefix) {
-    // Source from github latest release by default - this doesn't work unfortunately due to CORS
-    if (path.endsWith("LavaVu.wasm") || path.endsWith("LavaVu.data")) return "https://github.com/lavavu/LavaVu/releases/latest/download/" + path;
-    //if (path.endsWith("LavaVu.wasm") || path.endsWith("LavaVu.data")) alert("https://github.com/lavavu/LavaVu/releases/latest/download/" + path);
+  locateFile: function(path, prefix) {
+    // Source from github pages by default, disabled for now
+    //if (path.endsWith("LavaVu.wasm") || path.endsWith("LavaVu.data")) return "https://lavavu.github.io/" + path;
     // otherwise, use the default, the prefix (JS file's dir) + the path
     return prefix + path;
-  },*/
+  },
   totalDependencies: 0,
   monitorRunDependencies: function(left) {
     this.totalDependencies = Math.max(this.totalDependencies, left);
@@ -1320,7 +1319,7 @@ var Module = typeof Module !== 'undefined' ? Module : {};
       function assert(check, msg) {
         if (!check) throw msg + new Error().stack;
       }
-  Module['FS_createPath']('/', 'shaders', true, true);
+  Module['FS_createPath']("/", "shaders", true, true);
 
       /** @constructor */
       function DataRequest(start, end, audio) {
@@ -1393,7 +1392,7 @@ var Module = typeof Module !== 'undefined' ? Module : {};
     }
   
    }
-   loadPackage({"files": [{"filename": "/dict.json", "start": 0, "end": 52683, "audio": 0}, {"filename": "/shaders/pointShader.vert", "start": 52683, "end": 53918, "audio": 0}, {"filename": "/shaders/fontShader.frag", "start": 53918, "end": 54362, "audio": 0}, {"filename": "/shaders/volumeShader.old", "start": 54362, "end": 70402, "audio": 0}, {"filename": "/shaders/volumeShader.frag", "start": 70402, "end": 87672, "audio": 0}, {"filename": "/shaders/volumeShader.vert", "start": 87672, "end": 87750, "audio": 0}, {"filename": "/shaders/lineShader.frag", "start": 87750, "end": 88695, "audio": 0}, {"filename": "/shaders/fontShader.vert", "start": 88695, "end": 88985, "audio": 0}, {"filename": "/shaders/pointShader.frag", "start": 88985, "end": 92369, "audio": 0}, {"filename": "/shaders/triShader.frag", "start": 92369, "end": 97560, "audio": 0}, {"filename": "/shaders/default.vert", "start": 97560, "end": 97877, "audio": 0}, {"filename": "/shaders/volumeShader_b2f.frag", "start": 97877, "end": 115021, "audio": 0}, {"filename": "/shaders/default.frag", "start": 115021, "end": 115279, "audio": 0}, {"filename": "/shaders/lineShader.vert", "start": 115279, "end": 115801, "audio": 0}, {"filename": "/shaders/triShader.vert", "start": 115801, "end": 116921, "audio": 0}, {"filename": "/font.bin", "start": 116921, "end": 342281, "audio": 0}], "remote_package_size": 342281, "package_uuid": "35df0b6f-ae1f-4891-af61-6432c630c220"});
+   loadPackage({"files": [{"filename": "/dict.json", "start": 0, "end": 52017, "audio": 0}, {"filename": "/shaders/triShader.frag", "start": 52017, "end": 57024, "audio": 0}, {"filename": "/shaders/fontShader.vert", "start": 57024, "end": 57314, "audio": 0}, {"filename": "/shaders/pointShader.frag", "start": 57314, "end": 60698, "audio": 0}, {"filename": "/shaders/triShader.vert", "start": 60698, "end": 61818, "audio": 0}, {"filename": "/shaders/lineShader.frag", "start": 61818, "end": 62763, "audio": 0}, {"filename": "/shaders/default.frag", "start": 62763, "end": 63021, "audio": 0}, {"filename": "/shaders/pointShader.vert", "start": 63021, "end": 64256, "audio": 0}, {"filename": "/shaders/lineShader.vert", "start": 64256, "end": 64778, "audio": 0}, {"filename": "/shaders/volumeShader.vert", "start": 64778, "end": 64856, "audio": 0}, {"filename": "/shaders/volumeShader.frag", "start": 64856, "end": 80976, "audio": 0}, {"filename": "/shaders/fontShader.frag", "start": 80976, "end": 81420, "audio": 0}, {"filename": "/shaders/default.vert", "start": 81420, "end": 81737, "audio": 0}, {"filename": "/font.bin", "start": 81737, "end": 307097, "audio": 0}], "remote_package_size": 307097, "package_uuid": "13d9053b-36af-4147-8fdf-1e44009d66fd"});
   
   })();
   
@@ -1581,7 +1580,7 @@ if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
 // include: web_or_worker_shell_read.js
 
 
-  read_ = function shell_read(url) {
+  read_ = function(url) {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url, false);
       xhr.send(null);
@@ -1589,7 +1588,7 @@ if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
   };
 
   if (ENVIRONMENT_IS_WORKER) {
-    readBinary = function readBinary(url) {
+    readBinary = function(url) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, false);
         xhr.responseType = 'arraybuffer';
@@ -1598,11 +1597,11 @@ if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
     };
   }
 
-  readAsync = function readAsync(url, onload, onerror) {
+  readAsync = function(url, onload, onerror) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.responseType = 'arraybuffer';
-    xhr.onload = function xhr_onload() {
+    xhr.onload = function() {
       if (xhr.status == 200 || (xhr.status == 0 && xhr.response)) { // file URLs can return 0
         onload(xhr.response);
         return;
@@ -2579,6 +2578,8 @@ var __ATPOSTRUN__ = []; // functions called after the main() is called
 var runtimeInitialized = false;
 var runtimeExited = false;
 
+__ATINIT__.push({ func: function() { ___wasm_call_ctors() } });
+
 function preRun() {
 
   if (Module['preRun']) {
@@ -2823,14 +2824,13 @@ if (!isDataURI(wasmBinaryFile)) {
   wasmBinaryFile = locateFile(wasmBinaryFile);
 }
 
-function getBinary() {
+function getBinary(file) {
   try {
-    if (wasmBinary) {
+    if (file == wasmBinaryFile && wasmBinary) {
       return new Uint8Array(wasmBinary);
     }
-
     if (readBinary) {
-      return readBinary(wasmBinaryFile);
+      return readBinary(file);
     } else {
       throw "both async and sync fetching of the wasm failed";
     }
@@ -2841,23 +2841,36 @@ function getBinary() {
 }
 
 function getBinaryPromise() {
-  // If we don't have the binary yet, and have the Fetch api, use that;
-  // in some environments, like Electron's render process, Fetch api may be present, but have a different context than expected, let's only use it on the Web
-  if (!wasmBinary && (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) && typeof fetch === 'function'
-      // Let's not use fetch to get objects over file:// as it's most likely Cordova which doesn't support fetch for file://
+  // If we don't have the binary yet, try to to load it asynchronously.
+  // Fetch has some additional restrictions over XHR, like it can't be used on a file:// url.
+  // See https://github.com/github/fetch/pull/92#issuecomment-140665932
+  // Cordova or Electron apps are typically loaded from a file:// url.
+  // So use fetch if it is available and the url is not a file, otherwise fall back to XHR.
+  if (!wasmBinary && (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER)) {
+    if (typeof fetch === 'function'
       && !isFileURI(wasmBinaryFile)
-      ) {
-    return fetch(wasmBinaryFile, { credentials: 'same-origin' }).then(function(response) {
-      if (!response['ok']) {
-        throw "failed to load wasm binary file at '" + wasmBinaryFile + "'";
+    ) {
+      return fetch(wasmBinaryFile, { credentials: 'same-origin' }).then(function(response) {
+        if (!response['ok']) {
+          throw "failed to load wasm binary file at '" + wasmBinaryFile + "'";
+        }
+        return response['arrayBuffer']();
+      }).catch(function () {
+          return getBinary(wasmBinaryFile);
+      });
+    }
+    else {
+      if (readAsync) {
+        // fetch is not available or url is file => try XHR (readAsync uses XHR internally)
+        return new Promise(function(resolve, reject) {
+          readAsync(wasmBinaryFile, function(response) { resolve(new Uint8Array(/** @type{!ArrayBuffer} */(response))) }, reject)
+        });
       }
-      return response['arrayBuffer']();
-    }).catch(function () {
-      return getBinary();
-    });
+    }
   }
+    
   // Otherwise, getBinary should be able to get it synchronously
-  return Promise.resolve().then(getBinary);
+  return Promise.resolve().then(function() { return getBinary(wasmBinaryFile); });
 }
 
 // Create the wasm instance.
@@ -2939,6 +2952,7 @@ function createWasm() {
       return instantiateArrayBuffer(receiveInstantiatedSource);
     }
   }
+
   // User shell pages can write their own Module.instantiateWasm = function(imports, successCallback) callback
   // to manually instantiate the Wasm module themselves. This allows pages to run the instantiation parallel
   // to any other async startup actions they are performing.
@@ -2956,26 +2970,26 @@ function createWasm() {
   return {}; // no exports yet; we'll fill them in later
 }
 
-// Globals used by JS i64 conversions
+// Globals used by JS i64 conversions (see makeSetValue)
 var tempDouble;
 var tempI64;
 
 // === Body ===
 
 var ASM_CONSTS = {
-  46471: function() {if (window.viewer.mode == "Translate") return 1; if (window.viewer.mode == "Zoom") return 2; return 0;},  
- 95935: function($0, $1) {initBase(UTF8ToString($0), UTF8ToString($1))},  
- 96177: function() {if (Module["setStatus"]) Module["setStatus"]("");},  
- 96266: function($0, $1) {if (Module["setStatus"]) Module["setStatus"]("Downloading data... (" + $0 + "/" + $1 + ")");},  
- 96405: function($0) {if (window.viewer) window.viewer.loadFile(UTF8ToString($0))},  
- 96486: function($0, $1) {window.download($0, $1)},  
- 98328: function() {if (window.viewer && window.viewer.gui) {window.viewer.gui.destroy(); window.viewer.gui = null; window.viewer.vis = {}; }},  
- 108793: function() {return window.reload_flag;},  
- 108822: function() {window.reload_flag = false;},  
- 108852: function() {return window.resized;},  
- 108884: function() {window.resized = false;},  
- 109006: function($0, $1) {window.download($0, $1)},  
- 121175: function($0) {if ($0) Module.requestFullscreen(false,true); else document.exitFullscreen();}
+  6114: function($0, $1) {initBase(UTF8ToString($0), UTF8ToString($1))},  
+ 6356: function() {if (Module["setStatus"]) Module["setStatus"]("");},  
+ 6446: function($0, $1) {if (Module["setStatus"]) Module["setStatus"]("Downloading data... (" + $0 + "/" + $1 + ")");},  
+ 6585: function($0) {if (window.viewer) window.viewer.loadFile(UTF8ToString($0))},  
+ 6666: function($0, $1) {window.download($0, $1)},  
+ 8504: function() {if (window.viewer && window.viewer.gui) {window.viewer.gui.destroy(); window.viewer.gui = null; window.viewer.vis = {}; }},  
+ 93833: function() {return window.reload_flag;},  
+ 93862: function() {window.reload_flag = false;},  
+ 93892: function() {return window.resized;},  
+ 93924: function() {window.resized = false;},  
+ 94046: function($0, $1) {window.download($0, $1)},  
+ 94862: function() {if (window.viewer.mode == "Translate") return 1; if (window.viewer.mode == "Zoom") return 2; return 0;},  
+ 120944: function($0) {if ($0) Module.requestFullscreen(false,true); else document.exitFullscreen();}
 };
 function get_browser_modifiers(){ if (window.m_alt || window.m_shift || window.m_ctrl) { var val = 0; if (window.m_shift) val += 1; if (window.m_ctrl) val += 2; if (window.m_alt) val += 4; return val; } else { return 0; } }
 function get_commands(){ if (window.commands && window.commands.length) { var cmd = window.commands.join(';'); window.commands = []; var lengthBytes = lengthBytesUTF8(cmd)+1; var stringOnWasmHeap = _malloc(lengthBytes); stringToUTF8(cmd, stringOnWasmHeap, lengthBytes); return stringOnWasmHeap; } else { return null; } }
@@ -3327,6 +3341,9 @@ function set_theme(light){ window.set_light_theme(light); }
 
   function ___cxa_rethrow() {
       var catchInfo = exceptionCaught.pop();
+      if (!catchInfo) {
+        abort('no exception to throw');
+      }
       var info = catchInfo.get_exception_info();
       var ptr = catchInfo.get_base_ptr();
       if (!info.get_rethrown()) {
@@ -3800,6 +3817,7 @@ function set_theme(light){ window.set_light_theme(light); }
         // add the new node to the parent
         if (parent) {
           parent.contents[name] = node;
+          parent.timestamp = node.timestamp;
         }
         return node;
       },getFileDataAsRegularArray:function(node) {
@@ -3904,17 +3922,21 @@ function set_theme(light){ window.set_light_theme(light); }
           }
           // do the internal rewiring
           delete old_node.parent.contents[old_node.name];
+          old_node.parent.timestamp = Date.now()
           old_node.name = new_name;
           new_dir.contents[new_name] = old_node;
+          new_dir.timestamp = old_node.parent.timestamp;
           old_node.parent = new_dir;
         },unlink:function(parent, name) {
           delete parent.contents[name];
+          parent.timestamp = Date.now();
         },rmdir:function(parent, name) {
           var node = FS.lookupNode(parent, name);
           for (var i in node.contents) {
             throw new FS.ErrnoError(55);
           }
           delete parent.contents[name];
+          parent.timestamp = Date.now();
         },readdir:function(node) {
           var entries = ['.', '..'];
           for (var key in node.contents) {
@@ -4004,9 +4026,10 @@ function set_theme(light){ window.set_light_theme(light); }
           MEMFS.expandFileStorage(stream.node, offset + length);
           stream.node.usedBytes = Math.max(stream.node.usedBytes, offset + length);
         },mmap:function(stream, address, length, position, prot, flags) {
-          // We don't currently support location hints for the address of the mapping
-          assert(address === 0);
-  
+          if (address !== 0) {
+            // We don't currently support location hints for the address of the mapping
+            throw new FS.ErrnoError(28);
+          }
           if (!FS.isFile(stream.node.mode)) {
             throw new FS.ErrnoError(43);
           }
@@ -4169,6 +4192,7 @@ function set_theme(light){ window.set_light_theme(light); }
         // if we failed to find it in the cache, call into the VFS
         return FS.lookup(parent, name);
       },createNode:function(parent, name, mode, rdev) {
+        assert(typeof parent === 'object')
         var node = new FS.FSNode(parent, name, mode, rdev);
   
         FS.hashAddNode(node);
@@ -5124,13 +5148,14 @@ function set_theme(light){ window.set_light_theme(light); }
         FS.mkdir('/dev/shm');
         FS.mkdir('/dev/shm/tmp');
       },createSpecialDirectories:function() {
-        // create /proc/self/fd which allows /proc/self/fd/6 => readlink gives the name of the stream for fd 6 (see test_unistd_ttyname)
+        // create /proc/self/fd which allows /proc/self/fd/6 => readlink gives the
+        // name of the stream for fd 6 (see test_unistd_ttyname)
         FS.mkdir('/proc');
-        FS.mkdir('/proc/self');
+        var proc_self = FS.mkdir('/proc/self');
         FS.mkdir('/proc/self/fd');
         FS.mount({
           mount: function() {
-            var node = FS.createNode('/proc/self', 'fd', 16384 | 511 /* 0777 */, 73);
+            var node = FS.createNode(proc_self, 'fd', 16384 | 511 /* 0777 */, 73);
             node.node_ops = {
               lookup: function(parent, name) {
                 var fd = +name;
@@ -6092,10 +6117,12 @@ function set_theme(light){ window.set_light_theme(light); }
       if (!info) return 0;
       if (len === info.len) {
         var stream = FS.getStream(info.fd);
-        if (info.prot & 2) {
-          SYSCALLS.doMsync(addr, stream, len, info.flags, info.offset);
+        if (stream) {
+          if (info.prot & 2) {
+            SYSCALLS.doMsync(addr, stream, len, info.flags, info.offset);
+          }
+          FS.munmap(stream);
         }
-        FS.munmap(stream);
         SYSCALLS.mappings[addr] = null;
         if (info.allocated) {
           _free(info.malloc);
@@ -6116,7 +6143,7 @@ function set_theme(light){ window.set_light_theme(light); }
   try {
   
       var pathname = SYSCALLS.getStr(path);
-      var mode = SYSCALLS.get();
+      var mode = varargs ? SYSCALLS.get() : 0;
       var stream = FS.open(pathname, flags, mode);
       return stream.fd;
     } catch (e) {
@@ -6349,14 +6376,14 @@ function set_theme(light){ window.set_light_theme(light); }
       return domElement;
     }
   
-  function __getBoundingClientRect(e) {
+  function getBoundingClientRect(e) {
       return specialHTMLTargets.indexOf(e) < 0 ? e.getBoundingClientRect() : {'left':0,'top':0};
     }
   function _emscripten_get_element_css_size(target, width, height) {
       target = findEventTarget(target);
       if (!target) return -4;
   
-      var rect = __getBoundingClientRect(target);
+      var rect = getBoundingClientRect(target);
       HEAPF64[((width)>>3)]=rect.width;
       HEAPF64[((height)>>3)]=rect.height;
   
@@ -9158,7 +9185,7 @@ function set_theme(light){ window.set_light_theme(light); }
                   buttonsCount: gamepad.buttons.length,
                   axesCount: gamepad.axes.length,
                   buttons: allocate(new Array(gamepad.buttons.length), ALLOC_NORMAL),
-                  axes: allocate(new Array(gamepad.axes.length*4), 'float', ALLOC_NORMAL)
+                  axes: allocate(new Array(gamepad.axes.length*4), ALLOC_NORMAL)
                 };
   
                 if (GLFW.joystickFunc) {
@@ -9443,18 +9470,23 @@ function set_theme(light){ window.set_light_theme(light); }
         for (i = 0; i < GLFW.windows.length && GLFW.windows[i] == null; i++) {
           // no-op
         }
+        var useWebGL = GLFW.hints[0x00022001] > 0; // Use WebGL when we are told to based on GLFW_CLIENT_API
         if (i == GLFW.windows.length) {
-          var contextAttributes = {
-            antialias: (GLFW.hints[0x0002100D] > 1), // GLFW_SAMPLES
-            depth: (GLFW.hints[0x00021005] > 0),     // GLFW_DEPTH_BITS
-            stencil: (GLFW.hints[0x00021006] > 0),   // GLFW_STENCIL_BITS
-            alpha: (GLFW.hints[0x00021004] > 0)      // GLFW_ALPHA_BITS
+          if (useWebGL) {
+            var contextAttributes = {
+              antialias: (GLFW.hints[0x0002100D] > 1), // GLFW_SAMPLES
+              depth: (GLFW.hints[0x00021005] > 0),     // GLFW_DEPTH_BITS
+              stencil: (GLFW.hints[0x00021006] > 0),   // GLFW_STENCIL_BITS
+              alpha: (GLFW.hints[0x00021004] > 0)      // GLFW_ALPHA_BITS
+            }
+            Module.ctx = Browser.createContext(Module['canvas'], true, true, contextAttributes);
+          } else {
+            Browser.init();
           }
-          Module.ctx = Browser.createContext(Module['canvas'], true, true, contextAttributes);
         }
   
         // If context creation failed, do not return a valid window
-        if (!Module.ctx) return 0;
+        if (!Module.ctx && useWebGL) return 0;
   
         // Get non alive id
         var win = new GLFW_Window(id, width, height, title, monitor, share);
@@ -10072,8 +10104,6 @@ function set_theme(light){ window.set_light_theme(light); }
         case 77:
         case 78:
         case 139:
-        case 80:
-        case 81:
         case 82:
         case 68:
         case 67:
@@ -10086,7 +10116,6 @@ function set_theme(light){ window.set_light_theme(light); }
         case 52:
         case 51:
         case 46:
-        case 79:
           return 200809;
         case 27:
         case 246:
@@ -10120,6 +10149,9 @@ function set_theme(light){ window.set_light_theme(light); }
         case 32:
         case 173:
         case 35:
+        case 80:
+        case 81:
+        case 79:
           return -1;
         case 176:
         case 177:
@@ -10326,8 +10358,6 @@ function intArrayToString(array) {
 }
 
 
-
-__ATINIT__.push({ func: function() { ___wasm_call_ctors() } });
 var asmLibraryArg = {
   "__cxa_allocate_exception": ___cxa_allocate_exception,
   "__cxa_atexit": ___cxa_atexit,
@@ -10546,7 +10576,7 @@ var _main = Module["_main"] = createExportWrapper("main");
 var _memset = Module["_memset"] = createExportWrapper("memset");
 
 /** @type {function(...*):?} */
-var ___errno_location = Module["___errno_location"] = createExportWrapper("__errno_location");
+var ___em_js__set_canvas_visible = Module["___em_js__set_canvas_visible"] = createExportWrapper("__em_js__set_canvas_visible");
 
 /** @type {function(...*):?} */
 var _malloc = Module["_malloc"] = createExportWrapper("malloc");
@@ -10558,16 +10588,16 @@ var _free = Module["_free"] = createExportWrapper("free");
 var _fflush = Module["_fflush"] = createExportWrapper("fflush");
 
 /** @type {function(...*):?} */
-var _usleep = Module["_usleep"] = createExportWrapper("usleep");
-
-/** @type {function(...*):?} */
-var ___em_js__set_canvas_visible = Module["___em_js__set_canvas_visible"] = createExportWrapper("__em_js__set_canvas_visible");
-
-/** @type {function(...*):?} */
-var ___em_js__get_commands = Module["___em_js__get_commands"] = createExportWrapper("__em_js__get_commands");
+var ___errno_location = Module["___errno_location"] = createExportWrapper("__errno_location");
 
 /** @type {function(...*):?} */
 var ___em_js__set_theme = Module["___em_js__set_theme"] = createExportWrapper("__em_js__set_theme");
+
+/** @type {function(...*):?} */
+var _usleep = Module["_usleep"] = createExportWrapper("usleep");
+
+/** @type {function(...*):?} */
+var ___em_js__get_commands = Module["___em_js__get_commands"] = createExportWrapper("__em_js__get_commands");
 
 /** @type {function(...*):?} */
 var ___em_js__get_browser_modifiers = Module["___em_js__get_browser_modifiers"] = createExportWrapper("__em_js__get_browser_modifiers");
@@ -10737,10 +10767,10 @@ function invoke_iii(index,a1,a2) {
   }
 }
 
-function invoke_i(index) {
+function invoke_iiii(index,a1,a2,a3) {
   var sp = stackSave();
   try {
-    return wasmTable.get(index)();
+    return wasmTable.get(index)(a1,a2,a3);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0 && e !== 'longjmp') throw e;
@@ -10748,10 +10778,10 @@ function invoke_i(index) {
   }
 }
 
-function invoke_iiii(index,a1,a2,a3) {
+function invoke_viii(index,a1,a2,a3) {
   var sp = stackSave();
   try {
-    return wasmTable.get(index)(a1,a2,a3);
+    wasmTable.get(index)(a1,a2,a3);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0 && e !== 'longjmp') throw e;
@@ -10880,6 +10910,17 @@ function invoke_diii(index,a1,a2,a3) {
   }
 }
 
+function invoke_i(index) {
+  var sp = stackSave();
+  try {
+    return wasmTable.get(index)();
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0 && e !== 'longjmp') throw e;
+    _setThrew(1, 0);
+  }
+}
+
 function invoke_viiiiiii(index,a1,a2,a3,a4,a5,a6,a7) {
   var sp = stackSave();
   try {
@@ -10906,17 +10947,6 @@ function invoke_viiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10) {
   var sp = stackSave();
   try {
     wasmTable.get(index)(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0 && e !== 'longjmp') throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viii(index,a1,a2,a3) {
-  var sp = stackSave();
-  try {
-    wasmTable.get(index)(a1,a2,a3);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0 && e !== 'longjmp') throw e;
@@ -11060,10 +11090,49 @@ if (!Object.getOwnPropertyDescriptor(Module, "SYSCALLS")) Module["SYSCALLS"] = f
 if (!Object.getOwnPropertyDescriptor(Module, "syscallMmap2")) Module["syscallMmap2"] = function() { abort("'syscallMmap2' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
 if (!Object.getOwnPropertyDescriptor(Module, "syscallMunmap")) Module["syscallMunmap"] = function() { abort("'syscallMunmap' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
 if (!Object.getOwnPropertyDescriptor(Module, "JSEvents")) Module["JSEvents"] = function() { abort("'JSEvents' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerKeyEventCallback")) Module["registerKeyEventCallback"] = function() { abort("'registerKeyEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
 if (!Object.getOwnPropertyDescriptor(Module, "specialHTMLTargets")) Module["specialHTMLTargets"] = function() { abort("'specialHTMLTargets' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
 if (!Object.getOwnPropertyDescriptor(Module, "maybeCStringToJsString")) Module["maybeCStringToJsString"] = function() { abort("'maybeCStringToJsString' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
 if (!Object.getOwnPropertyDescriptor(Module, "findEventTarget")) Module["findEventTarget"] = function() { abort("'findEventTarget' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
 if (!Object.getOwnPropertyDescriptor(Module, "findCanvasEventTarget")) Module["findCanvasEventTarget"] = function() { abort("'findCanvasEventTarget' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "getBoundingClientRect")) Module["getBoundingClientRect"] = function() { abort("'getBoundingClientRect' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "fillMouseEventData")) Module["fillMouseEventData"] = function() { abort("'fillMouseEventData' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerMouseEventCallback")) Module["registerMouseEventCallback"] = function() { abort("'registerMouseEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerWheelEventCallback")) Module["registerWheelEventCallback"] = function() { abort("'registerWheelEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerUiEventCallback")) Module["registerUiEventCallback"] = function() { abort("'registerUiEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerFocusEventCallback")) Module["registerFocusEventCallback"] = function() { abort("'registerFocusEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "fillDeviceOrientationEventData")) Module["fillDeviceOrientationEventData"] = function() { abort("'fillDeviceOrientationEventData' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerDeviceOrientationEventCallback")) Module["registerDeviceOrientationEventCallback"] = function() { abort("'registerDeviceOrientationEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "fillDeviceMotionEventData")) Module["fillDeviceMotionEventData"] = function() { abort("'fillDeviceMotionEventData' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerDeviceMotionEventCallback")) Module["registerDeviceMotionEventCallback"] = function() { abort("'registerDeviceMotionEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "screenOrientation")) Module["screenOrientation"] = function() { abort("'screenOrientation' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "fillOrientationChangeEventData")) Module["fillOrientationChangeEventData"] = function() { abort("'fillOrientationChangeEventData' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerOrientationChangeEventCallback")) Module["registerOrientationChangeEventCallback"] = function() { abort("'registerOrientationChangeEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "fillFullscreenChangeEventData")) Module["fillFullscreenChangeEventData"] = function() { abort("'fillFullscreenChangeEventData' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerFullscreenChangeEventCallback")) Module["registerFullscreenChangeEventCallback"] = function() { abort("'registerFullscreenChangeEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerRestoreOldStyle")) Module["registerRestoreOldStyle"] = function() { abort("'registerRestoreOldStyle' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "hideEverythingExceptGivenElement")) Module["hideEverythingExceptGivenElement"] = function() { abort("'hideEverythingExceptGivenElement' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "restoreHiddenElements")) Module["restoreHiddenElements"] = function() { abort("'restoreHiddenElements' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "setLetterbox")) Module["setLetterbox"] = function() { abort("'setLetterbox' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "currentFullscreenStrategy")) Module["currentFullscreenStrategy"] = function() { abort("'currentFullscreenStrategy' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "restoreOldWindowedStyle")) Module["restoreOldWindowedStyle"] = function() { abort("'restoreOldWindowedStyle' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "softFullscreenResizeWebGLRenderTarget")) Module["softFullscreenResizeWebGLRenderTarget"] = function() { abort("'softFullscreenResizeWebGLRenderTarget' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "doRequestFullscreen")) Module["doRequestFullscreen"] = function() { abort("'doRequestFullscreen' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "fillPointerlockChangeEventData")) Module["fillPointerlockChangeEventData"] = function() { abort("'fillPointerlockChangeEventData' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerPointerlockChangeEventCallback")) Module["registerPointerlockChangeEventCallback"] = function() { abort("'registerPointerlockChangeEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerPointerlockErrorEventCallback")) Module["registerPointerlockErrorEventCallback"] = function() { abort("'registerPointerlockErrorEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "requestPointerLock")) Module["requestPointerLock"] = function() { abort("'requestPointerLock' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "fillVisibilityChangeEventData")) Module["fillVisibilityChangeEventData"] = function() { abort("'fillVisibilityChangeEventData' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerVisibilityChangeEventCallback")) Module["registerVisibilityChangeEventCallback"] = function() { abort("'registerVisibilityChangeEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerTouchEventCallback")) Module["registerTouchEventCallback"] = function() { abort("'registerTouchEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "fillGamepadEventData")) Module["fillGamepadEventData"] = function() { abort("'fillGamepadEventData' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerGamepadEventCallback")) Module["registerGamepadEventCallback"] = function() { abort("'registerGamepadEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerBeforeUnloadEventCallback")) Module["registerBeforeUnloadEventCallback"] = function() { abort("'registerBeforeUnloadEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "fillBatteryEventData")) Module["fillBatteryEventData"] = function() { abort("'fillBatteryEventData' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "battery")) Module["battery"] = function() { abort("'battery' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "registerBatteryEventCallback")) Module["registerBatteryEventCallback"] = function() { abort("'registerBatteryEventCallback' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "setCanvasElementSize")) Module["setCanvasElementSize"] = function() { abort("'setCanvasElementSize' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
+if (!Object.getOwnPropertyDescriptor(Module, "getCanvasElementSize")) Module["getCanvasElementSize"] = function() { abort("'getCanvasElementSize' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
 if (!Object.getOwnPropertyDescriptor(Module, "polyfillSetImmediate")) Module["polyfillSetImmediate"] = function() { abort("'polyfillSetImmediate' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
 if (!Object.getOwnPropertyDescriptor(Module, "demangle")) Module["demangle"] = function() { abort("'demangle' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
 if (!Object.getOwnPropertyDescriptor(Module, "demangleAll")) Module["demangleAll"] = function() { abort("'demangleAll' was not exported. add it to EXTRA_EXPORTED_RUNTIME_METHODS (see the FAQ)") };
@@ -11187,9 +11256,9 @@ function callMain(args) {
 
     var ret = entryFunction(argc, argv);
 
-    // In PROXY_TO_PTHREAD builds, we should never exit the runtime below, as execution is asynchronously handed
-    // off to a pthread.
-    // if we're not running an evented main loop, it's time to exit
+    // In PROXY_TO_PTHREAD builds, we should never exit the runtime below, as
+    // execution is asynchronously handed off to a pthread.
+      // if we're not running an evented main loop, it's time to exit
       exit(ret, /* implicit = */ true);
   }
   catch(e) {
