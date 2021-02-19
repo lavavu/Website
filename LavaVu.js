@@ -187,7 +187,7 @@ var Module = typeof Module !== 'undefined' ? Module : {};
     }
   
    }
-   loadPackage({"files": [{"filename": "/dict.json", "start": 0, "end": 52683, "audio": 0}, {"filename": "/shaders/pointShader.vert", "start": 52683, "end": 53918, "audio": 0}, {"filename": "/shaders/fontShader.frag", "start": 53918, "end": 54362, "audio": 0}, {"filename": "/shaders/volumeShader.old", "start": 54362, "end": 70402, "audio": 0}, {"filename": "/shaders/volumeShader.frag", "start": 70402, "end": 87672, "audio": 0}, {"filename": "/shaders/volumeShader.vert", "start": 87672, "end": 87750, "audio": 0}, {"filename": "/shaders/lineShader.frag", "start": 87750, "end": 88695, "audio": 0}, {"filename": "/shaders/fontShader.vert", "start": 88695, "end": 88985, "audio": 0}, {"filename": "/shaders/pointShader.frag", "start": 88985, "end": 92369, "audio": 0}, {"filename": "/shaders/triShader.frag", "start": 92369, "end": 97560, "audio": 0}, {"filename": "/shaders/default.vert", "start": 97560, "end": 97877, "audio": 0}, {"filename": "/shaders/volumeShader_b2f.frag", "start": 97877, "end": 115021, "audio": 0}, {"filename": "/shaders/default.frag", "start": 115021, "end": 115279, "audio": 0}, {"filename": "/shaders/lineShader.vert", "start": 115279, "end": 115801, "audio": 0}, {"filename": "/shaders/triShader.vert", "start": 115801, "end": 116921, "audio": 0}, {"filename": "/font.bin", "start": 116921, "end": 342281, "audio": 0}], "remote_package_size": 342281, "package_uuid": "35df0b6f-ae1f-4891-af61-6432c630c220"});
+   loadPackage({"files": [{"filename": "/dict.json", "start": 0, "end": 52017, "audio": 0}, {"filename": "/shaders/pointShader.vert", "start": 52017, "end": 53252, "audio": 0}, {"filename": "/shaders/fontShader.frag", "start": 53252, "end": 53696, "audio": 0}, {"filename": "/shaders/volumeShader.frag", "start": 53696, "end": 69816, "audio": 0}, {"filename": "/shaders/volumeShader.vert", "start": 69816, "end": 69894, "audio": 0}, {"filename": "/shaders/lineShader.frag", "start": 69894, "end": 70839, "audio": 0}, {"filename": "/shaders/fontShader.vert", "start": 70839, "end": 71129, "audio": 0}, {"filename": "/shaders/pointShader.frag", "start": 71129, "end": 74513, "audio": 0}, {"filename": "/shaders/triShader.frag", "start": 74513, "end": 79520, "audio": 0}, {"filename": "/shaders/default.vert", "start": 79520, "end": 79837, "audio": 0}, {"filename": "/shaders/default.frag", "start": 79837, "end": 80095, "audio": 0}, {"filename": "/shaders/lineShader.vert", "start": 80095, "end": 80617, "audio": 0}, {"filename": "/shaders/triShader.vert", "start": 80617, "end": 81737, "audio": 0}, {"filename": "/font.bin", "start": 81737, "end": 307097, "audio": 0}], "remote_package_size": 307097, "package_uuid": "11a180e7-3ee9-4433-93d6-1bd2792b8d9a"});
   
   })();
   
@@ -1758,18 +1758,18 @@ var tempI64;
 
 var ASM_CONSTS = {
   46471: function() {if (window.viewer.mode == "Translate") return 1; if (window.viewer.mode == "Zoom") return 2; return 0;},  
- 95935: function($0, $1) {initBase(UTF8ToString($0), UTF8ToString($1))},  
- 96177: function() {if (Module["setStatus"]) Module["setStatus"]("");},  
- 96266: function($0, $1) {if (Module["setStatus"]) Module["setStatus"]("Downloading data... (" + $0 + "/" + $1 + ")");},  
- 96405: function($0) {if (window.viewer) window.viewer.loadFile(UTF8ToString($0))},  
- 96486: function($0, $1) {window.download($0, $1)},  
- 98328: function() {if (window.viewer && window.viewer.gui) {window.viewer.gui.destroy(); window.viewer.gui = null; window.viewer.vis = {}; }},  
- 108793: function() {return window.reload_flag;},  
- 108822: function() {window.reload_flag = false;},  
- 108852: function() {return window.resized;},  
- 108884: function() {window.resized = false;},  
- 109006: function($0, $1) {window.download($0, $1)},  
- 121175: function($0) {if ($0) Module.requestFullscreen(false,true); else document.exitFullscreen();}
+ 95903: function($0, $1) {initBase(UTF8ToString($0), UTF8ToString($1))},  
+ 96145: function() {if (Module["setStatus"]) Module["setStatus"]("");},  
+ 96234: function($0, $1) {if (Module["setStatus"]) Module["setStatus"]("Downloading data... (" + $0 + "/" + $1 + ")");},  
+ 96373: function($0) {if (window.viewer) window.viewer.loadFile(UTF8ToString($0))},  
+ 96454: function($0, $1) {window.download($0, $1)},  
+ 98296: function() {if (window.viewer && window.viewer.gui) {window.viewer.gui.destroy(); window.viewer.gui = null; window.viewer.vis = {}; }},  
+ 108761: function() {return window.reload_flag;},  
+ 108790: function() {window.reload_flag = false;},  
+ 108820: function() {return window.resized;},  
+ 108852: function() {window.resized = false;},  
+ 108974: function($0, $1) {window.download($0, $1)},  
+ 121095: function($0) {if ($0) Module.requestFullscreen(false,true); else document.exitFullscreen();}
 };
 function get_browser_modifiers(){ if (window.m_alt || window.m_shift || window.m_ctrl) { var val = 0; if (window.m_shift) val += 1; if (window.m_ctrl) val += 2; if (window.m_alt) val += 4; return val; } else { return 0; } }
 function get_commands(){ if (window.commands && window.commands.length) { var cmd = window.commands.join(';'); window.commands = []; var lengthBytes = lengthBytesUTF8(cmd)+1; var stringOnWasmHeap = _malloc(lengthBytes); stringToUTF8(cmd, stringOnWasmHeap, lengthBytes); return stringOnWasmHeap; } else { return null; } }
